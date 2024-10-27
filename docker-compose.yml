@@ -1,0 +1,7 @@
+services:
+
+  api:
+    image: doconnor/movies-api:1.0
+    container_name: movies-api
+    ports:
+      - '9000:9000'
