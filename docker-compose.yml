@@ -5,12 +5,25 @@ services:
     container_name: movies-api
     ports:
       - '9000:9000'
+    environment:
+      - MONGODB_URI=mongodb://${MONGO_USER}:password@mongodb:27017/movies
+      - REDIS_URI=redis://redis
+      - ENABLE_WRITING_HANDLERS=false
 
   mongodb:
     image: mongo:8.0-rc
+
+    volumes:
+      - mongodb-data:/data/db
 
   redis:
     image: redis:alpine
 
   mongo-express:
     image: mongo-express:1.0-20-alpine3.19
+
+    profiles: 
+      - dev # only start this service in the dev profile
+
+
+  
