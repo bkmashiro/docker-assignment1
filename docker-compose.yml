@@ -1,5 +1,4 @@
 services:
-
   api:
     image: doconnor/movies-api:1.0
     container_name: movies-api
@@ -13,6 +12,10 @@ services:
     networks:
       - app_network
       - db_network
+
+    depends_on:
+      - mongodb
+      - redis
 
   mongodb:
     image: mongo:8.0-rc
@@ -37,8 +40,10 @@ services:
 
   mongo-express:
     image: mongo-express:1.0-20-alpine3.19
-
-    profiles: 
+    restart: always
+    ports:
+      - 8080:8081
+    profiles:
       - dev # only start this service in the dev profile
 
     environment:
@@ -49,12 +54,32 @@ services:
     networks:
       - db_network
 
+    depends_on:
+      - mongodb
+
+  seeding-mongo:
+    image: mongo:8.0-rc
+    depends_on:
+      - mongodb
+    profiles:
+      - dev # only start this service in the dev profile
+    volumes:
+      - ./seeding.json:/seeding.json
+      - ./seeding-mongo.sh:/seeding-mongo.sh
+    environment:
+      - MONGODB_DATABASE=value
+    command:
+      seeding-mongo.sh
+
 networks:
-  app_network: # movies and redis
+  app_network:
+    # movies and redis
     driver: bridge
-  db_network: # movies and mongodb
+  db_network:
+    # movies and mongodb
     driver: bridge
-  admin_network: # mongo-express and mongodb
+  admin_network:
+    # mongo-express and mongodb
     driver: bridge
 
 volumes:
