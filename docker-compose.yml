@@ -6,7 +6,7 @@ services:
     ports:
       - '9000:9000'
     environment:
-      - MONGODB_URI=mongodb://${MONGO_USER}:password@mongodb:27017/movies
+      - MONGODB_URI=mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@mongodb:27017/${MONGODB_DATABASE}
       - REDIS_URI=redis://redis
       - ENABLE_WRITING_HANDLERS=false
 
@@ -16,6 +16,12 @@ services:
     volumes:
       - mongodb-data:/data/db
 
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGODB_DATABASE}
+
+
   redis:
     image: redis:alpine
 
@@ -24,6 +30,11 @@ services:
 
     profiles: 
       - dev # only start this service in the dev profile
+
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGODB_USERNAME}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGODB_PASSWORD}
+      - ME_CONFIG_MONGODB_SERVER=mongodb
 
 
   
