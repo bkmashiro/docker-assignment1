@@ -10,6 +10,10 @@ services:
       - REDIS_URI=redis://redis
       - ENABLE_WRITING_HANDLERS=false
 
+    networks:
+      - app_network
+      - db_network
+
   mongodb:
     image: mongo:8.0-rc
 
@@ -21,9 +25,15 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
       - MONGO_INITDB_DATABASE=${MONGODB_DATABASE}
 
+    networks:
+      - db_network
+      - admin_network
 
   redis:
     image: redis:alpine
+
+    networks:
+      - app_network
 
   mongo-express:
     image: mongo-express:1.0-20-alpine3.19
@@ -36,5 +46,17 @@ services:
       - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGODB_PASSWORD}
       - ME_CONFIG_MONGODB_SERVER=mongodb
 
+    networks:
+      - db_network
 
-  
+networks:
+  app_network: # movies and redis
+    driver: bridge
+  db_network: # movies and mongodb
+    driver: bridge
+  admin_network: # mongo-express and mongodb
+    driver: bridge
+
+volumes:
+  mongodb-data:
+    driver: local
