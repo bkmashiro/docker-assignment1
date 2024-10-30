@@ -67,9 +67,7 @@ services:
       - ./seeding-mongo.sh:/seeding-mongo.sh
     environment:
       - MONGODB_DATABASE=${MONGODB_DATABASE}
-      - MONGODB_USERNAME=${MONGODB_USERNAME}
-      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
-      - MONGODB_URI=mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@mongodb:27017/${MONGODB_DATABASE}
+      - MONGODB_URI=mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@mongodb:27017
     command:
       /seeding-mongo.sh
     networks:

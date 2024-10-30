@@ -1,1 +1,1 @@
-mongoimport --host mongodb --db ${MONGODB_DATABASE} --collection properties --type json --file /mongo-seed/data.json --jsonArray
+mongoimport --host mongodb --username admin --password password --db tmdb_movies --collection movies --type json --file seeding.json --jsonArray --authenticationDatabase=admin
