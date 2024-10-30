@@ -67,9 +67,11 @@ services:
       - ./seeding.json:/seeding.json
       - ./seeding-mongo.sh:/seeding-mongo.sh
     environment:
-      - MONGODB_DATABASE=value
+      - MONGODB_DATABASE=${MONGODB_DATABASE}
+      - MONGODB_USERNAME=${MONGODB_USERNAME}
+      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
     command:
-      seeding-mongo.sh
+      /seeding-mongo.sh
 
 networks:
   app_network:
