@@ -5,7 +5,7 @@ services:
     ports:
       - '9000:9000'
     environment:
-      - MONGODB_URI=mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@mongodb:27017/${MONGODB_DATABASE}
+      - MONGODB_URI=mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@mongodb:27017
       - REDIS_URI=redis://redis
       - ENABLE_WRITING_HANDLERS=false
 
@@ -26,7 +26,6 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
-      - MONGO_INITDB_DATABASE=${MONGODB_DATABASE}
 
     networks:
       - db_network
@@ -73,13 +72,15 @@ services:
       - MONGODB_URI=mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@mongodb:27017/${MONGODB_DATABASE}
     command:
       /seeding-mongo.sh
+    networks:
+      - db_network
 
 networks:
   app_network:
     # movies and redis
     driver: bridge
   db_network:
-    # movies and mongodb
+    # movies and mongodb and seeding-mongo
     driver: bridge
   admin_network:
     # mongo-express and mongodb

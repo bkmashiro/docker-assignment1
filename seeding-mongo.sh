@@ -1,1 +1,1 @@
-mongoimport --host ${MONGODB_URI} --db ${MONGODB_DATABASE} --username ${MONGODB_USERNAME} --password ${MONGODB_PASSWORD} --collection properties --type json --file /mongo-seed/data.json --jsonArray
+mongoimport --host mongodb --db ${MONGODB_DATABASE} --collection properties --type json --file /mongo-seed/data.json --jsonArray
