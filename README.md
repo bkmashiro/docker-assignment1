@@ -1,5 +1,14 @@
 ## Agile Software Practice - Assignment 1.
 
+### ⚠️⚠️⚠️ TO THESE WHO REFERENCED THIS REPO:
+
+PLEASE NOTE THAT THIS REPO IS A ASSIGNMENT, YOU SHALL NOT COPY ANY CODE FROM THIS REPO.
+
+IF YOU DO SO, YOU WILL BE RESPONSIBLE FOR ANY CONSEQUENCES.
+
+PLEASE HAVE CITATION IF YOU REFERENCED THIS REPO.
+
+
 reference:
 
 1. how to seed database: https://levelup.gitconnected.com/dockerising-your-database-for-local-development-seeding-data-mariadb-sql-and-mongodb-nosql-f18ba6d8c9ed
