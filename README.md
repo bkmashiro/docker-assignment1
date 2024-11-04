@@ -9,6 +9,19 @@ IF YOU DO SO, YOU WILL BE RESPONSIBLE FOR ANY CONSEQUENCES.
 PLEASE HAVE CITATION IF YOU REFERENCED THIS REPO.
 
 
+## Quick Start
+
+TL;DR: 
+
+```bash
+
+# start all services (including development services: seeding and mongo-express)
+docker-compose -f .\docker-compose.yml --profile dev up -d
+
+# production mode
+docker-compose -f .\docker-compose.yml up -d
+```
+
 ## reference
 
 1. how to seed database: https://levelup.gitconnected.com/dockerising-your-database-for-local-development-seeding-data-mariadb-sql-and-mongodb-nosql-f18ba6d8c9ed
