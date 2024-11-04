@@ -13,7 +13,16 @@ PLEASE HAVE CITATION IF YOU REFERENCED THIS REPO.
 
 TL;DR: 
 
+
+
 ```bash
+
+# clone the repo
+git clone git@github.com:bkmashiro/docker-assignment1.git
+cd docker-assignment1
+
+# set up environment variables
+mv .env.example .env
 
 # start all services (including development services: seeding and mongo-express)
 docker-compose -f .\docker-compose.yml --profile dev up -d
@@ -86,3 +95,8 @@ mongoimport \
   --authenticationDatabase=admin # fix auth error
 ```
 
+
+
+### Off topic
+
+As for the name of the database in seeding, I read thru the rust code in `doconnor/movies-api:1.0` and it's `tmdb_movies`.
