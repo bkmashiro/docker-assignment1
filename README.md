@@ -1,4 +1,10 @@
-## Agile Software Practice - Assignment 1.
+## Docker Assignment - Agile Software Practice.
+
+__Name:__ YuzheShi
+
+__Demo:__ https://youtu.be/ECxpreZ-rbE
+
+
 
 ### ⚠️⚠️⚠️ TO THESE WHO REFERENCED THIS REPO:
 
@@ -9,55 +15,12 @@ IF YOU DO SO, YOU WILL BE RESPONSIBLE FOR ANY CONSEQUENCES.
 PLEASE HAVE CITATION IF YOU REFERENCED THIS REPO.
 
 
-## Quick Start
 
-TL;DR: 
+This repository contains the containerization of the mukti-container application illustrated below.
 
+![](./images/arch.png)
 
-
-```bash
-
-# clone the repo
-git clone git@github.com:bkmashiro/docker-assignment1.git
-cd docker-assignment1
-
-# set up environment variables
-mv .env.example .env
-
-# start all services (including development services: seeding and mongo-express)
-docker-compose -f .\docker-compose.yml --profile dev up -d
-
-# production mode
-docker-compose -f .\docker-compose.yml up -d
-```
-
-## reference
-
-1. how to seed database: https://levelup.gitconnected.com/dockerising-your-database-for-local-development-seeding-data-mariadb-sql-and-mongodb-nosql-f18ba6d8c9ed
-
-2. how to start service conditionally: https://docs.docker.com/compose/how-tos/profiles/#start-specific-profiles
-
-## Explanation
-
-### Launch Order
-
-use `depends_on` to control.
-
-### Network Isolation
-
-we have 3 network namespace here: 
-
-1. app_network (movies and redis)
-2. db_network (movies, mongodb and seeding-mongo)
-3. admin_network (mongo-express and mongodb)
-
-### Dev/Prod Mode
-
-use `profiles` to control.
-
-e.g.  `docker-compose -f .\docker-compose.yml --profile dev up -d` runs all services (normal ones and dev ones.)
-
-### Seeding
+### Database Seeding.
 
 ```dockerfile
 seeding-mongo:
@@ -95,8 +58,22 @@ mongoimport \
   --authenticationDatabase=admin # fix auth error
 ```
 
+### Multi-Stack.
 
+use `profiles` to control.
+
+e.g.  `docker-compose -f .\docker-compose.yml --profile dev up -d` runs all services (normal ones and dev ones.)
 
 ### Off topic
 
 As for the name of the database in seeding, I read thru the rust code in `doconnor/movies-api:1.0` and it's `tmdb_movies`.
+
+
+
+
+
+## Reference
+
+1. how to seed database: https://levelup.gitconnected.com/dockerising-your-database-for-local-development-seeding-data-mariadb-sql-and-mongodb-nosql-f18ba6d8c9ed
+
+2. how to start service conditionally: https://docs.docker.com/compose/how-tos/profiles/#start-specific-profiles
